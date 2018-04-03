@@ -1,0 +1,62 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Hello World App
+# during dev, should point to your local machine
+host: 192.165.128.14:3001
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /sacche/insert:
+    post:
+      description: Inserisce le informazioni riguardanti il tag nel database
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/InsertModel"
+      responses:
+        default:
+          description: Messaggio che indica lo stato dell'operazione richiesta
+          schema:
+            type: string
+  /sacche/update:
+    post:
+      description: Aggiorna le informazioni riguardanti una sacca di sangue
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/InsertModel"
+      responses:
+        default:
+          description: Messaggio che indica lo stato dell'operazione richiesta
+          schema:
+            type: string
+# complex objects have schema definitions
+definitions:
+  InsertModel:
+    type: object
+    properties:
+      uid:
+        description: "User ID del tag NFC"
+        type: string
+      gruppo:
+        description: "Gruppo sanguigno"
+        type: string
+      rh:
+        description: "Rh"
+        type: string
